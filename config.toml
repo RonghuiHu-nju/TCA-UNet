@@ -1,0 +1,57 @@
+[sbss_config]
+L = 7
+nfft = 512
+shift = 256
+alpha = 0.95
+beta = 0.4
+
+[train_dataset]
+fs = 16000
+length_in_seconds = 8
+num_data_per_epoch = 10000
+random_start_point = true
+train = true
+
+[train_dataloader]
+batch_size = 8
+num_workers = 4
+drop_last = true
+pin_memory = true
+
+[validation_dataset]
+fs = 16000
+length_in_seconds = 8
+random_start_point = true
+train = false
+
+[validation_dataloader]
+batch_size = 10
+num_workers = 4
+drop_last = true
+pin_memory = true
+
+[Train]
+learning_rate = 0.001
+adam_b1 = 0.8
+adam_b2 = 0.99
+
+[DDP]
+dist_backend = "nccl"
+world_size = 1
+
+[FFT]
+sample_rate = 16000
+n_fft = 512
+hop_length = 256
+win_length = 512
+
+[trainer]
+epochs = 350
+save_checkpoint_interval = 1
+clip_grad_norm_value = 10.0
+exp_path = "/data/ssd0/ronghui.hu/AEC_E2E/TCA-UNET/GRU-T-GROUP/exp/exp"
+resume = false
+resume_datetime = ""
+
+[listener]
+listener_sr = 16000
